@@ -10,8 +10,8 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'
 import { FaArrowCircleRight, FaArrowAltCircleRight } from 'react-icons/fa'
 function App() {
   return (
-    <section className=''>
-      <h1 className='heading'>Featured Products</h1>
+    <section>
+      <h1 className='heading font-bold'>Featured Products</h1>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -34,82 +34,56 @@ function App() {
         className='swiper_container'
       >
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
-            />
-          </Link>
-        </SwiperSlide>{' '}
-        <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
+          <Link to='/singleproduct'>
             <img
               src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
               alt='slide_image'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct' className='hover:opacity-75'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
+              loading='lazy'
             />
           </Link>
         </SwiperSlide>

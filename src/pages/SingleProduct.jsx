@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/20/solid'
+
 import Footer from '../component/Footer'
 
 const product = {
@@ -9,9 +8,9 @@ const product = {
   price: '3500',
   href: '#',
   imageSrc:
-    'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
+    'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
 
-  imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
+  imageAlt: 'Shirt',
   stock: true,
   colors: [
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -41,17 +40,18 @@ const SingleProduct = () => {
   return (
     <>
       <section>
-        <div className='flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+        <div className='flex w-full items-center overflow-hidden bg-white  pt-14'>
           <div className='grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8'>
             <div className=' sm:col-span-4 aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100'>
               <img
                 src={product.imageSrc}
                 alt={product.imageAlt}
                 className='object-cover object-center'
+                loading='lazy'
               />
             </div>
             <div className='sm:col-span-8 lg:col-span-7'>
-              <h2 className='text-4xl text-gray-900 sm:pr-12 flex justify-between'>
+              <h2 className='text-4xl text-gray-900 flex justify-between'>
                 <span className='font-bold'>{product.name}</span>
                 <small
                   className={classNames(
