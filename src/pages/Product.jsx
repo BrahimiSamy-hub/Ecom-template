@@ -1,6 +1,9 @@
 import Filter from '../component/Products/Filter'
 import Footer from '../component/Footer'
+import Pagination from '../component/Products/Pagination'
+import SortBy from '../component/Products/SortBy'
 import { products } from '../constant'
+import { Link } from 'react-router-dom'
 
 const Product = () => {
   return (
@@ -8,21 +11,21 @@ const Product = () => {
       <section>
         <div className='bg-white'>
           <div className='py-10'>
-            <div className='flex '>
+            <div className='flex'>
               <div className='hidden lg:block sm:block'>
                 <Filter />
               </div>
-              <div className='mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 '>
-                <div className=' col-span-4 mb-[-50px]' data-aos='fade-up'>
+              <div className='mt-6 grid grid-cols-2 lg:gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4'>
+                <div className='col-span-4 mb-[-50px]' data-aos='fade-up'>
                   <div className='flex justify-between'>
                     <h3>{products.length} Product(s) found</h3>
-                    <span>Sort by</span>
+                    <SortBy />
                   </div>
                 </div>
                 {products.map((product) => (
                   <div
                     key={product.id}
-                    className='group relative'
+                    className='group relative col-span-4 sm:col-span-4 lg:col-span-1'
                     data-aos='fade-up'
                   >
                     <div className='aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:w-full'>
@@ -35,16 +38,15 @@ const Product = () => {
                     </div>
                     <div className='mt-4 flex justify-between'>
                       <div>
-                        <h3 className=' text-black'>
-                          <a href={product.href}>
+                        <h3 className='text-black'>
+                          <Link to={product.href}>
                             <span
                               aria-hidden='true'
                               className='absolute inset-0 dont-bold'
                             />
                             {product.name}
-                          </a>
+                          </Link>
                         </h3>
-
                         <small className='text-sm text-gray-500'>
                           {product.category}
                         </small>
@@ -60,6 +62,7 @@ const Product = () => {
                 ))}
               </div>
             </div>
+            <Pagination />
           </div>
         </div>
       </section>

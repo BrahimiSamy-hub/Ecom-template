@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
-
+import { useCart } from '../context/CartContext'
 import Footer from '../component/Footer'
 
 const product = {
-  name: 'Shirt ',
+  name: 'Shirt2 ',
   price: '3500',
   href: '#',
   imageSrc:
@@ -36,6 +36,21 @@ function classNames(...classes) {
 const SingleProduct = () => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const { addToCart } = useCart()
+
+  const handleAddToCart = (event) => {
+    event.preventDefault()
+    const item = {
+      id: product.name,
+      name: product.name,
+      price: product.price,
+      color: selectedColor.name,
+      size: selectedSize.name,
+      imageSrc: product.imageSrc,
+      imageAlt: product.imageAlt,
+    }
+    addToCart(item)
+  }
 
   return (
     <>
@@ -212,9 +227,13 @@ const SingleProduct = () => {
 
                   <button
                     type='submit'
-                    className='mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                    className={`mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:opacity-75  ${
+                      !product.stock && 'opacity-25 cursor-not-allowed'
+                    }`}
+                    onClick={handleAddToCart}
+                    disabled={!product.stock}
                   >
-                    Add to cart
+                    {product.stock ? 'Add to cart' : 'Out of Stock'}
                   </button>
                 </form>
               </div>

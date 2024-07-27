@@ -7,11 +7,13 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Link } from 'react-router-dom'
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'
-import { FaArrowCircleRight, FaArrowAltCircleRight } from 'react-icons/fa'
+
 function App() {
   return (
     <section>
-      <h1 className='heading font-bold'>Featured Products</h1>
+      <h1 className='heading font-bold text-center mb-8 text-2xl'>
+        Featured Products
+      </h1>
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -33,67 +35,38 @@ function App() {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className='swiper_container'
       >
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Link to='/singleproduct'>
-            <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
-              alt='slide_image'
-              loading='lazy'
-            />
-          </Link>
-        </SwiperSlide>
+        {[...Array(6)].map((_, index) => (
+          <SwiperSlide key={index} className='relative group'>
+            <Link to='/singleproduct' className='block'>
+              <div className='relative overflow-hidden'>
+                <img
+                  src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
+                  alt='slide_image'
+                  loading='lazy'
+                  className='w-full transition-opacity duration-500 group-hover:opacity-0'
+                />
+                <img
+                  src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg'
+                  alt='slide_image'
+                  loading='lazy'
+                  className='w-full absolute top-0 left-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100'
+                />
+                <div className='absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-30 opacity-0 transition-opacity duration-500 group-hover:opacity-100'>
+                  <h2 className='text-white text-lg font-semibold'>
+                    Product Name
+                  </h2>
+                  <p className='text-white text-sm'>
+                    3500{' '}
+                    <small>
+                      <sup>DA</sup>
+                    </small>
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </SwiperSlide>
+        ))}
         <div className='slider-controler'>
-          {/* <div className='swiper-button-prev slider-arrow'>
-            <ion-icon name='arrow-back-outline'></ion-icon>
-          </div>
-          <div className='swiper-button-next slider-arrow'>
-            <ion-icon name='arrow-forward-outline'></ion-icon>
-          </div> */}
           <div className='swiper-pagination'></div>
         </div>
       </Swiper>

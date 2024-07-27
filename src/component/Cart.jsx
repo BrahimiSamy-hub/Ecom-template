@@ -1,55 +1,21 @@
-import React, { Fragment, useState } from 'react'
-import { Dialog, RadioGroup, Transition } from '@headlessui/react'
+import React, { Fragment } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MdDelete } from 'react-icons/md'
 import { useCart } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '2500',
-    color: 'Black',
-  },
-  {
-    id: 2,
-    name: 'Classic Tee',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Classic Tee in black.",
-    price: '3000',
-    color: 'Grey',
-  },
-  {
-    id: 3,
-    name: 'Classic Tee',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Classic Tee in black.",
-    price: '3000',
-    color: 'Grey',
-  },
-  {
-    id: 4,
-    name: 'Classic Tee',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Classic Tee in black.",
-    price: '3000',
-    color: 'Grey',
-  },
-]
+const Cart = () => {
+  const { isOpen, toggleCart, cartItems, removeFromCart } = useCart()
 
-const cart = () => {
-  const { isOpen, toggleCart } = useCart()
+  const calculateSubtotal = () => {
+    return cartItems
+      .reduce(
+        (total, item) => total + parseFloat(item.price) * item.quantity,
+        0
+      )
+      .toFixed(2)
+  }
 
   return (
     <>
@@ -57,10 +23,10 @@ const cart = () => {
         <Dialog className='relative z-50' onClose={toggleCart}>
           <Transition.Child
             as={Fragment}
-            enter='ease-in-out duration-500'
+            enter='ease-in-out duration-300'
             enterFrom='opacity-0'
             enterTo='opacity-100'
-            leave='ease-in-out duration-500'
+            leave='ease-in-out duration-300'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
@@ -72,10 +38,10 @@ const cart = () => {
               <div className='pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 '>
                 <Transition.Child
                   as={Fragment}
-                  enter='transform transition ease-in-out duration-500 sm:duration-700'
+                  enter='transform transition ease-in-out duration-300 sm:duration-400'
                   enterFrom='translate-x-full'
                   enterTo='translate-x-0'
-                  leave='transform transition ease-in-out duration-500 sm:duration-700'
+                  leave='transform transition ease-in-out duration-300 sm:duration-400'
                   leaveFrom='translate-x-0'
                   leaveTo='translate-x-full'
                 >
@@ -108,8 +74,8 @@ const cart = () => {
                               role='list'
                               className='-my-6 divide-y divide-gray-200'
                             >
-                              {products.map((product) => (
-                                <li key={product.id} className='flex py-6'>
+                              {cartItems.map((product, index) => (
+                                <li key={index} className='flex py-6'>
                                   <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
                                     <img
                                       src={product.imageSrc}
@@ -120,7 +86,7 @@ const cart = () => {
 
                                   <div className='ml-4 flex flex-1 flex-col'>
                                     <div>
-                                      <div className='flex justify-between text-base font-medium '>
+                                      <div className='flex justify-between text-base font-medium'>
                                         <h3>{product.name}</h3>
                                         <p className='ml-4'>
                                           {product.price}{' '}
@@ -130,16 +96,25 @@ const cart = () => {
                                         </p>
                                       </div>
                                       <p className='mt-1 text-sm text-gray-500'>
-                                        {product.color}
+                                        {product.color} / {product.size}
                                       </p>
                                     </div>
                                     <div className='flex flex-1 items-end justify-between text-sm'>
-                                      <p className='text-gray-500'>Qty x5</p>
+                                      <p className='text-gray-500'>
+                                        Qty x{product.quantity}
+                                      </p>
 
                                       <div className='flex hover:opacity-75'>
                                         <button
                                           type='button'
-                                          className='font-medium text-red-500  border-2 border-red-500 rounded'
+                                          className='font-medium text-red-500 border-2 border-red-500 rounded'
+                                          onClick={() =>
+                                            removeFromCart(
+                                              product.id,
+                                              product.size,
+                                              product.color
+                                            )
+                                          }
                                         >
                                           <MdDelete size={30} />
                                         </button>
@@ -157,7 +132,7 @@ const cart = () => {
                         <div className='flex justify-between text-base font-medium '>
                           <p>Subtotal</p>
                           <p>
-                            262.00{' '}
+                            {calculateSubtotal()}{' '}
                             <small>
                               <sup>DA</sup>
                             </small>
@@ -180,7 +155,7 @@ const cart = () => {
                             or{' '}
                             <button
                               type='button'
-                              className='font-medium text-color-1  hover:opacity-75'
+                              className='font-medium text-color-1 hover:opacity-75'
                               onClick={toggleCart}
                             >
                               Continue Shopping
@@ -201,4 +176,4 @@ const cart = () => {
   )
 }
 
-export default cart
+export default Cart

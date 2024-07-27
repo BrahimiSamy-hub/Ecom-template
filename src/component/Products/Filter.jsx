@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem as Item } from '@szhsin/react-accordion'
 import { chevron } from '../../assets'
 import { useState } from 'react'
-
+import DualRange from './DualRange'
 const AccordionItem = ({ header, ...rest }) => (
   <Item
     {...rest}
@@ -61,7 +61,10 @@ export default function App() {
   }
 
   return (
-    <div className='mx-2 my-4 border-t w-44 mt-16' data-aos='fade-up'>
+    <div
+      className='sticky top-20 mx-2 my-4 border-t w-44 mt-16 sm:w-64'
+      data-aos='fade-up'
+    >
       <Accordion transition transitionTimeout={200} allowMultiple>
         <AccordionItem
           header={<h2 className='font-bold'>Categories</h2>}
@@ -84,13 +87,15 @@ export default function App() {
           </ul>
         </AccordionItem>
 
-        <AccordionItem
+        {/* <AccordionItem
           header={<h2 className='font-bold'>Price</h2>}
           initialEntered
-        ></AccordionItem>
+        >
+          <DualRange />
+        </AccordionItem> */}
 
         <AccordionItem
-          header={<h2 className='font-bold'>Size</h2>}
+          header={<h2 className='font-bold'>Article</h2>}
           initialEntered
         >
           <ul>

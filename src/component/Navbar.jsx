@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext'
 import { useState } from 'react'
 
 const Navbar = () => {
-  const { toggleCart } = useCart()
+  const { toggleCart, cartItems } = useCart()
 
   const [openNavigation, setOpenNavigation] = useState(false)
 
@@ -26,8 +26,10 @@ const Navbar = () => {
     setOpenNavigation(false)
   }
 
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
+
   return (
-    <div className='z-50 fixed flex w-full bg-white p-4 justify-between px-14 items-center shadow-md min-h-20'>
+    <div className='z-50 fixed flex w-full bg-white p-4 justify-between px-14 items-center shadow-sm min-h-20'>
       <div className='justify-center'>
         <NavLink to='/'>
           <img src={yourlogo} alt='logo' className='' loading='lazy' />
@@ -61,7 +63,7 @@ const Navbar = () => {
         >
           <IoCartOutline size={40} />
           <span className='absolute -top-2 -right-3 flex items-center justify-center w-6 h-6 font-bold text-white bg-black rounded-full '>
-            <h6 className='mb-0.5'>0</h6>
+            <h6 className='mb-0.5'>{totalItems}</h6>
           </span>
         </button>
         <button className='ml-auto lg:hidden' onClick={toggleNavigation}>
