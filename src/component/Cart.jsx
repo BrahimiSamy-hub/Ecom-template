@@ -153,14 +153,16 @@ const Cart = () => {
                         <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
                           <p>
                             or{' '}
-                            <button
-                              type='button'
-                              className='font-medium text-color-1 hover:opacity-75'
-                              onClick={toggleCart}
-                            >
-                              Continue Shopping
-                              <span aria-hidden='true'> &rarr;</span>
-                            </button>
+                            <Link to='/product'>
+                              <button
+                                type='button'
+                                className='font-medium text-color-1 hover:opacity-75'
+                                onClick={toggleCart}
+                              >
+                                Continue Shopping
+                                <span aria-hidden='true'> &rarr;</span>
+                              </button>
+                            </Link>
                           </p>
                         </div>
                       </div>
