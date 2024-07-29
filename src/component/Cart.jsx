@@ -4,8 +4,10 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MdDelete } from 'react-icons/md'
 import { useCart } from '../context/CartContext'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Cart = () => {
+  const { t } = useTranslation()
   const { isOpen, toggleCart, cartItems, removeFromCart } = useCart()
 
   const calculateSubtotal = () => {
@@ -50,7 +52,7 @@ const Cart = () => {
                       <div className='flex-1 overflow-y-auto px-4 py-6 sm:px-6 '>
                         <div className='flex items-start justify-between '>
                           <Dialog.Title className='text-lg font-medium  '>
-                            Shopping cart
+                            {t('shoppingCart')}
                           </Dialog.Title>
                           <div className='ml-3 flex h-7 items-center'>
                             <button
@@ -59,7 +61,7 @@ const Cart = () => {
                               onClick={toggleCart}
                             >
                               <span className='absolute -inset-0.5' />
-                              <span className='sr-only'>Close panel</span>
+                              <span className='sr-only'>{t('closePanel')}</span>
                               <XMarkIcon
                                 className='h-6 w-6'
                                 aria-hidden='true'
@@ -79,7 +81,7 @@ const Cart = () => {
                                   <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
                                     <img
                                       src={product.imageSrc}
-                                      alt={product.imageAlt}
+                                      alt={t(product.imageAlt)}
                                       className='h-full w-full object-cover object-center'
                                     />
                                   </div>
@@ -87,11 +89,11 @@ const Cart = () => {
                                   <div className='ml-4 flex flex-1 flex-col'>
                                     <div>
                                       <div className='flex justify-between text-base font-medium'>
-                                        <h3>{product.name}</h3>
+                                        <h3>{t(product.name)}</h3>
                                         <p className='ml-4'>
                                           {product.price}{' '}
                                           <small>
-                                            <sup>DA</sup>
+                                            <sup>{t('devise')}</sup>
                                           </small>
                                         </p>
                                       </div>
@@ -101,7 +103,7 @@ const Cart = () => {
                                     </div>
                                     <div className='flex flex-1 items-end justify-between text-sm'>
                                       <p className='text-gray-500'>
-                                        Qty x{product.quantity}
+                                        {t('qty')} x{product.quantity}
                                       </p>
 
                                       <div className='flex hover:opacity-75'>
@@ -130,16 +132,16 @@ const Cart = () => {
 
                       <div className='border-t border-gray-200 px-4 py-6 sm:px-6'>
                         <div className='flex justify-between text-base font-medium '>
-                          <p>Subtotal</p>
+                          <p>{t('subtotal')}</p>
                           <p>
                             {calculateSubtotal()}{' '}
                             <small>
-                              <sup>DA</sup>
+                              <sup>{t('devise')}</sup>
                             </small>
                           </p>
                         </div>
                         <p className='mt-0.5 text-sm text-gray-500'>
-                          Shipping calculated at checkout.
+                          {t('shippingCalculatedAtCheckout')}
                         </p>
                         <div className='mt-6'>
                           <Link
@@ -147,19 +149,19 @@ const Cart = () => {
                             className='flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:opacity-75'
                             onClick={toggleCart}
                           >
-                            Checkout
+                            {t('checkout')}
                           </Link>
                         </div>
                         <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
                           <p>
-                            or{' '}
+                            {t('or')}{' '}
                             <Link to='/product'>
                               <button
                                 type='button'
                                 className='font-medium text-color-1 hover:opacity-75'
                                 onClick={toggleCart}
                               >
-                                Continue Shopping
+                                {t('continueShopping')}
                                 <span aria-hidden='true'> &rarr;</span>
                               </button>
                             </Link>

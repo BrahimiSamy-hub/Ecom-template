@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Pagination = ({ onPageChange }) => {
   const [currentPage, setCurrentPage] = useState(1)
+  const { i18n } = useTranslation()
   const totalPages = 2
+
+  const isRTL = i18n.language === 'ar'
 
   const handlePreviousClick = () => {
     if (currentPage > 1) {
@@ -36,9 +40,9 @@ const Pagination = ({ onPageChange }) => {
         onClick={handlePreviousClick}
         disabled={currentPage === 1}
       >
-        <span className='sr-only'>Previous</span>
+        <span className='sr-only'>{isRTL ? 'التالي' : 'Previous'}</span>
         <svg
-          className='w-4 h-4'
+          className={`w-4 h-4 ${isRTL ? 'transform rotate-180' : ''}`}
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -77,9 +81,9 @@ const Pagination = ({ onPageChange }) => {
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
       >
-        <span className='sr-only'>Next</span>
+        <span className='sr-only'>{isRTL ? 'السابق' : 'Next'}</span>
         <svg
-          className='w-4 h-4'
+          className={`w-4 h-4 ${isRTL ? 'transform rotate-180' : ''}`}
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'

@@ -2,7 +2,7 @@ import { yourlogoWite } from '../assets'
 
 const Footer = () => {
   return (
-    <footer className='w-full bg-black p-4 px-14'>
+    <footer className='w-full bg-black py-4 px-6'>
       <img src={yourlogoWite} alt='' loading='lazy' />
       <ul className='flex'>
         <li></li>

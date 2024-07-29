@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useCart } from '../context/CartContext'
 import Footer from '../component/Footer'
+import { useTranslation } from 'react-i18next'
 
 const product = {
-  name: 'Shirt2 ',
+  name: 'Shirt2',
   price: '3500',
   href: '#',
   imageSrc:
     'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-
   imageAlt: 'Shirt',
   stock: true,
   colors: [
@@ -34,6 +34,7 @@ function classNames(...classes) {
 }
 
 const SingleProduct = () => {
+  const { t } = useTranslation()
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const { addToCart } = useCart()
@@ -55,9 +56,9 @@ const SingleProduct = () => {
   return (
     <>
       <section>
-        <div className='flex w-full items-center overflow-hidden bg-white  pt-14'>
+        <div className='flex w-full items-center overflow-hidden bg-white pt-14'>
           <div className='grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8'>
-            <div className=' sm:col-span-4 aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100'>
+            <div className='sm:col-span-4 aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100'>
               <img
                 src={product.imageSrc}
                 alt={product.imageAlt}
@@ -76,7 +77,7 @@ const SingleProduct = () => {
                       : 'text-red-500 bg-red-500/15'
                   )}
                 >
-                  {product.stock ? 'In Stock' : 'Out of Stock'}
+                  {product.stock ? t('inStock') : t('outOfStock')}
                 </small>
               </h2>
 
@@ -91,13 +92,15 @@ const SingleProduct = () => {
 
               <div aria-labelledby='options-heading' className='mt-10'>
                 <h3 id='options-heading' className='sr-only'>
-                  Product options
+                  {t('productOptions')}
                 </h3>
 
                 <form>
                   {/* Colors */}
                   <div>
-                    <h4 className='text-sm font-medium text-gray-900'>Color</h4>
+                    <h4 className='text-sm font-medium text-gray-900'>
+                      {t('color')}
+                    </h4>
 
                     <RadioGroup
                       value={selectedColor}
@@ -105,7 +108,7 @@ const SingleProduct = () => {
                       className='mt-4'
                     >
                       <RadioGroup.Label className='sr-only'>
-                        Choose a color
+                        {t('chooseColor')}
                       </RadioGroup.Label>
                       <span className='flex items-center space-x-3'>
                         {product.colors.map((color) => (
@@ -139,12 +142,7 @@ const SingleProduct = () => {
 
                   <div className='mt-10'>
                     <small className='font-bold'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Quisque efficitur lacus vitae blandit tristique. Fusce ut
-                      consectetur turpis, vitae vulputate ligula. Integer mauris
-                      ipsum, eleifend ut velit ac, dictum congue nibh. Etiam vel
-                      viverra elit, sit amet sollicitudin tellus. Phasellus
-                      justo justo.
+                      {t('productDescription')}
                     </small>
                   </div>
 
@@ -152,7 +150,7 @@ const SingleProduct = () => {
                   <div className='mt-10'>
                     <div className='flex items-center justify-between'>
                       <h4 className='text-sm font-medium text-gray-900'>
-                        Size
+                        {t('size')}
                       </h4>
                     </div>
 
@@ -162,7 +160,7 @@ const SingleProduct = () => {
                       className='mt-4'
                     >
                       <RadioGroup.Label className='sr-only'>
-                        Choose a size
+                        {t('chooseSize')}
                       </RadioGroup.Label>
                       <div className='grid grid-cols-4 gap-4'>
                         {product.sizes.map((size) => (
@@ -233,7 +231,7 @@ const SingleProduct = () => {
                     onClick={handleAddToCart}
                     disabled={!product.stock}
                   >
-                    {product.stock ? 'Add to cart' : 'Out of Stock'}
+                    {product.stock ? t('addToCart') : t('outOfStock')}
                   </button>
                 </form>
               </div>

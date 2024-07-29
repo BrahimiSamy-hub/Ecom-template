@@ -4,8 +4,10 @@ import Footer from '../component/Footer'
 import { FaCircleCheck, FaSpinner } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useTranslation } from 'react-i18next'
 
 const Checkout = () => {
+  const { t } = useTranslation()
   const { cartItems, removeFromCart } = useCart()
   const [isOrderSuccessful, setIsOrderSuccessful] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -54,19 +56,19 @@ const Checkout = () => {
 
   return (
     <>
-      <section className='pt-[15rem] container min-h-screen mb-20'>
-        <div className='flex flex-col gap-10 sm:flex-row mt-16 '>
+      <section className='container min-h-screen '>
+        <div className='flex flex-col gap-10 sm:flex-row py-10'>
           {isOrderSuccessful ? (
             <div className='w-full min-h-[450px] border p-4 rounded-xl flex flex-col justify-center items-center gap-6'>
               <FaCircleCheck color='green' size={80} />
               <h2 className='font-manrope font-bold text-4xl leading-10 text-center uppercase'>
-                Order completed successfully
+                {t('orderCompletedSuccessfully')}
               </h2>
               <p className='font-normal text-lg leading-8 text-gray-500 text-center uppercase'>
-                Thank you!
+                {t('thankYou')}
               </p>
               <button className='border border-[#F17A28] p-2 rounded bg-[#F17A28] hover:opacity-75'>
-                <Link to='/shop'>Go Back to shop</Link>
+                <Link to='/shop'>{t('goBackToShop')}</Link>
               </button>
             </div>
           ) : (
@@ -75,7 +77,7 @@ const Checkout = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <h2 className='text-2xl font-semibold mb-4 text-center'>
-                Checkout
+                {t('checkout')}
               </h2>
 
               <div className='mb-4'>
@@ -83,16 +85,17 @@ const Checkout = () => {
                   className='block mb-2 text-sm font-medium'
                   htmlFor='name'
                 >
-                  Name<span className='text-red-500'>*</span>
+                  {t('name')}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type='text'
                   id='name'
-                  {...register('name', { required: 'Name is required' })}
+                  {...register('name', { required: t('nameRequired') })}
                   className={`w-full px-4 py-3 border rounded-md bg-white focus:border-white ${
                     errors.name ? 'border-red-500' : ''
                   }`}
-                  placeholder='Enter Name'
+                  placeholder={t('enterName')}
                 />
                 {errors.name && (
                   <p className='text-red-500 text-sm'>{errors.name.message}</p>
@@ -104,16 +107,17 @@ const Checkout = () => {
                   className='block mb-2 text-sm font-medium'
                   htmlFor='email'
                 >
-                  Email<span className='text-red-500'>*</span>
+                  {t('email')}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type='email'
                   id='email'
-                  {...register('email', { required: 'Email is required' })}
+                  {...register('email', { required: t('emailRequired') })}
                   className={`w-full px-4 py-3 border rounded-md bg-white focus:border-white ${
                     errors.email ? 'border-red-500' : ''
                   }`}
-                  placeholder='Enter Email'
+                  placeholder={t('enterEmail')}
                 />
                 {errors.email && (
                   <p className='text-red-500 text-sm'>{errors.email.message}</p>
@@ -125,22 +129,23 @@ const Checkout = () => {
                   className='block mb-2 text-sm font-medium'
                   htmlFor='mobileNumber'
                 >
-                  Mobile Number<span className='text-red-500'>*</span>
+                  {t('mobileNumber')}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type='tel'
                   id='mobileNumber'
                   {...register('mobileNumber', {
-                    required: 'Mobile Number is required',
+                    required: t('mobileNumberRequired'),
                     pattern: {
                       value: /^(05|06|07)[0-9]{8}$/,
-                      message: 'Invalid mobile number format',
+                      message: t('invalidMobileNumberFormat'),
                     },
                   })}
                   className={`w-full px-4 py-3 border rounded-md bg-white focus:border-white ${
                     errors.mobileNumber ? 'border-red-500' : ''
                   }`}
-                  placeholder='Enter Mobile Number'
+                  placeholder={t('enterMobileNumber')}
                 />
                 {errors.mobileNumber && (
                   <p className='text-red-500 text-sm'>
@@ -154,20 +159,20 @@ const Checkout = () => {
                   className='block mb-2 text-sm font-medium'
                   htmlFor='wilaya'
                 >
-                  Wilaya<span className='text-red-500'>*</span>
+                  {t('wilaya')}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <select
                   id='wilaya'
-                  {...register('wilaya', { required: 'Wilaya is required' })}
+                  {...register('wilaya', { required: t('wilayaRequired') })}
                   defaultValue=''
                   className={`px-3 py-3 border rounded-md bg-white text-gray-500 focus:border-white ${
                     errors.wilaya ? 'border-red-500' : ''
                   }`}
                 >
                   <option value='' disabled>
-                    Select a wilaya
+                    {t('selectAWilaya')}
                   </option>
-
                   <option value='d'>ds</option>
                 </select>
                 {errors.wilaya && (
@@ -182,12 +187,13 @@ const Checkout = () => {
                   className='block mb-2 text-sm font-medium'
                   htmlFor='method'
                 >
-                  Shipping Method<span className='text-red-500'>*</span>
+                  {t('shippingMethod')}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <select
                   id='method'
                   {...register('method', {
-                    required: 'Shipping Method is required',
+                    required: t('shippingMethodRequired'),
                   })}
                   defaultValue=''
                   className={`px-3 py-3 border rounded-md bg-white text-gray-500 focus:border-white ${
@@ -195,10 +201,10 @@ const Checkout = () => {
                   }`}
                 >
                   <option value='' disabled>
-                    Select a shipping method
+                    {t('selectAShippingMethod')}
                   </option>
-                  <option value='Desk'>Desk</option>
-                  <option value='Home'>Home</option>
+                  <option value='Desk'>{t('desk')}</option>
+                  <option value='Home'>{t('home')}</option>
                 </select>
                 {errors.method && (
                   <p className='text-red-500 text-sm'>
@@ -215,16 +221,18 @@ const Checkout = () => {
                 {isLoading ? (
                   <div className='flex items-center justify-center space-x-2'>
                     <FaSpinner className='animate-spin' />
-                    <span>Loading...</span>
+                    <span>{t('loading')}</span>
                   </div>
                 ) : (
-                  'Submit'
+                  t('submit')
                 )}
               </button>
             </form>
           )}
           <div className='w-full h-[590px] border p-4 rounded-xl'>
-            <h2 className='text-2xl font-semibold mb-4 text-center'>Cart</h2>
+            <h2 className='text-2xl font-semibold mb-4 text-center'>
+              {t('cart')}
+            </h2>
             <div className='mt-8'>
               <div className='flow-root'>
                 <ul
@@ -259,7 +267,7 @@ const Checkout = () => {
                         </div>
                         <div className='flex flex-1 items-end justify-between text-sm'>
                           <p className='text-gray-500'>
-                            Qty x{product.quantity}
+                            {t('qty')} x{product.quantity}
                           </p>
 
                           <div className='flex'>
@@ -274,7 +282,7 @@ const Checkout = () => {
                                 )
                               }
                             >
-                              Remove
+                              {t('remove')}
                             </button>
                           </div>
                         </div>
@@ -284,7 +292,7 @@ const Checkout = () => {
                 </ul>
                 <div className='border-t border-gray-200 px-4 py-6 sm:px-6 mt-10'>
                   <div className='flex justify-between text-base font-medium '>
-                    <p>Subtotal</p>
+                    <p>{t('subtotal')}</p>
                     <p>
                       3500
                       <small className='ml-1'>
@@ -293,7 +301,7 @@ const Checkout = () => {
                     </p>
                   </div>
                   <div className='flex justify-between text-base font-medium '>
-                    <p>Delivery</p>
+                    <p>{t('delivery')}</p>
                     <p>
                       400
                       <small className='ml-1'>
@@ -303,7 +311,7 @@ const Checkout = () => {
                   </div>
                   <hr />
                   <div className='flex justify-between text-base font-medium '>
-                    <p>Total</p>
+                    <p>{t('total')}</p>
                     <p>
                       3900
                       <small className='ml-1'>
